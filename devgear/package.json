@@ -1,0 +1,75 @@
+{
+  "name": "devgear",
+  "displayName": "DevGear AI",
+  "description": "",
+  "version": "1.0.0",
+  "publisher": "devgear",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": ["Other"],
+  "main": "./extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devgear-sidebar",
+          "title": "DevGear AI",
+          "icon": "$(hubot)"
+        }
+      ]
+    },
+    "views": {
+      "devgear-sidebar": [
+        {
+          "id": "devgear.chatView",
+          "name": "Chat",
+          "type": "webview",
+          "when": "true"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "devgear.setApiKey",
+        "title": "DevGear AI: Set Gemini API Key"
+      }
+    ],
+    "configuration": {
+      "title": "DevGear AI",
+      "properties": {
+        "devgear.geminiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Gemini API key"
+        },
+        "devgear.geminiModel": {
+          "type": "string",
+          "default": "gemini-1.5-flash",
+          "enum": ["gemini-1.5-flash"],
+          "enumDescriptions": [
+            "Gemini 1.5 Pro (higher quality, lower quota)",
+            "Gemini 1.5 Flash (faster, higher quota)"
+          ],
+          "description": "Select the Gemini model to use"
+        }
+      }
+    }
+  },
+  "activationEvents": [
+    "onView:devgear.chatView",
+    "onCommand:devgear.setApiKey"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "test": "vscode-test"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.12"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.60.0",
+    "eslint": "^8.57.0",
+    "@vscode/test-cli": "^0.0.9"
+  }
+}
